@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Response
-import cv2
+from dotenv import load_dotenv, find_dotenv
 import os
 import face_recognition
 from datetime import datetime, date
@@ -10,15 +10,21 @@ import cloudinary.api
 import cloudinary.uploader
 import time
 import io
+import cv2
 
+load_dotenv(find_dotenv())
+cloud_name = os.getenv("CLOUD_NAME")
+api_key = os.getenv("API_KEY")
+api_secret = os.getenv("API_SECRET")
+secure = os.getenv("SECURE")
 
 app = Flask(__name__)
 
 cloudinary.config(
-    cloud_name="dimnbv1qj",
-    api_key="685589194883471",
-    api_secret="Zn7snqhOiBaL5u52XL0dUtQOzhs",
-    secure=True,
+    cloud_name=cloud_name,
+    api_key=api_key,
+    api_secret=api_secret,
+    secure=secure
 )
 
 def load_student_images():
